@@ -1,8 +1,8 @@
 import React from 'react'
-
-function MyTextInput() {
+import './styles/input.css'
+function MyTextInput({ placeholder, onChange }) {
     return (
-        <div>MyTextInput</div>
+        <input placeholder={placeholder} />
     )
 }
 

@@ -1,0 +1,10 @@
+#container {
+    position: fixed;
+    background-color: rgb(179, 26, 179);
+    width: 20%;
+    height: auto;
+    top: 30%;
+    left: 40%;
+    text-align: center;
+    padding-bottom: 20px;
+}
