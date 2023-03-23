@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import BottomText from '../components/BottomText'
 import MyTextInput from '../components/MyTextInput'
 import './styles/login.css'
+import axios from 'axios'
 function Register() {
     const [userInfo, setUserInfo] = useState({})
 
@@ -13,6 +14,16 @@ function Register() {
         }));
     }
 
+    const submitRegister = () => {
+        axios.post('http://localhost:5000/auth/register', userInfo)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     return (
         <div id='main'>
             <div id='container'>
@@ -20,8 +31,7 @@ function Register() {
                 <MyTextInput placeholder={"User Name"} name={'username'} onChange={handleTextInputs} />
                 <MyTextInput placeholder={"E-mail"} name={'email'} onChange={handleTextInputs} />
                 <MyTextInput placeholder={"Password"} name={'password'} onChange={handleTextInputs} />
-                <MyTextInput placeholder={"Password Again"} name={'repassword'} onChange={handleTextInputs} />
-                <button>Register</button>
+                <button onClick={submitRegister}>Register</button>
                 <BottomText type={'register'} />
             </div>
         </div>
