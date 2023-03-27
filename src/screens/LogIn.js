@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import './styles/login.css'
 import MyTextInput from '../components/MyTextInput'
 import BottomText from '../components/BottomText'
+import axios from 'axios'
+import jwt from 'jwt-decode'
+import Cookies from 'js-cookie'
+
 function LogIn() {
     const [userInfo, setUserInfo] = useState({})
 
@@ -13,13 +17,28 @@ function LogIn() {
         }));
     }
 
+    const submitLogin = () => {
+        axios.post('http://localhost:5000/auth/login', userInfo)
+            .then(function (response) {
+
+                console.log(jwt(response.data.token));
+
+                Cookies.set("jwt_user", response.data.token, {
+                    expires: new Date(jwt(response.data.token).exp * 1000)
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     return (
         <div id='main'>
             <div id='container'>
                 <h3>Log In</h3>
                 <MyTextInput placeholder={"E-mail"} name={'email'} onChange={handleTextInputs} />
                 <MyTextInput placeholder={"Password"} name={'password'} onChange={handleTextInputs} />
-                <button>Log In</button>
+                <button onClick={submitLogin}>Log In</button>
                 <BottomText type={'login'} />
             </div>
         </div>
