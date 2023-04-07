@@ -6,7 +6,7 @@ function InGame() {
     const [a, setA] = useState('circle')
     const addGo = (e) => {
         const newCells = startCells.map((cell, index) => {
-            if (index == e.target.id) {
+            if (index == e.target.id && cell == "") {
                 return a
             }
             else {
